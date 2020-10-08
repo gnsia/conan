@@ -5,7 +5,17 @@ df = pd.read_csv('./dataset/track1.csv')
 
 # 같은 UA 같은 IP로 접근하면서 같은 Referer로 접근하는 로그를 잡아보자
 
-df.head()
+df.tail()
+
+
+##############################
+
+# 가장많이 접근한 IP
+
+##############################
+
+df['Host'].value_counts().head()
+
 
 ##############################
 
@@ -45,6 +55,7 @@ len(UA_Bot)
 Python = df['UA'].str.contains('Python', na = False)
 UA_Python = df[Python]
 len(UA_Python)
+UA_Python
 
 python = df['UA'].str.contains('python', na = False)
 UA_python = df[python]
