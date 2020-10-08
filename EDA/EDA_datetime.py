@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('./dataset/track1.csv')
 
@@ -12,23 +13,30 @@ df = pd.read_csv('./dataset/track1.csv')
 
 
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+df['Day'] = df['Timestamp'].dt.day
+df['Hour'] = df['Timestamp'].dt.hour
+df['Minute'] = df['Timestamp'].dt.minute
+df['Second'] = df['Timestamp'].dt.second
 
-df.info()
+df.head()
 
-df['Date'] = df['Timestamp'].dt.date
-df['Date'].value_counts().sort_index()
+df['Day'].unique()
+df[df['Day'] == 24]['Hour'].unique()
+df[df['Day'] == 25]['Hour'].unique()
+df[df['Day'] == 26]['Hour'].unique()
+df[df['Day'] == 27]['Hour'].unique()
+df[df['Day'] == 28]['Hour'].unique()
 
-d24 = df[df['Date'] == df['Date'].value_counts().sort_index().index[0]]
-d24.to_csv('./dataset/track1_d24.csv')
+df[(df['Day'] == 24) & (df['Hour'] == 10) & (df['Minute'] == 00) & (df['Second'] < 60)]['Host'].value_counts()
 
-d25 = df[df['Date'] == df['Date'].value_counts().sort_index().index[1]]
-d25.to_csv('./dataset/track1_d25.csv')
+day = 24
+hour = 10
+result = {}
+for i in df[(df['Day'] == day) & (df['Hour'] == hour)]['Minute'].unique():
+    x = df[(df['Day'] == day) & (df['Hour'] == hour) & (df['Minute'] == i)]['Host'].value_counts().index[0]
+    result[i] = [x]
 
-d26 = df[df['Date'] == df['Date'].value_counts().sort_index().index[2]]
-d26.to_csv('./dataset/track1_d26.csv')
 
-d27 = df[df['Date'] == df['Date'].value_counts().sort_index().index[3]]
-d27.to_csv('./dataset/track1_d27.csv')
 
-d28 = df[df['Date'] == df['Date'].value_counts().sort_index().index[4]]
-d28.to_csv('./dataset/track1_d28.csv')
+result
+result.values()

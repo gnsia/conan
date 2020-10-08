@@ -16,7 +16,7 @@ d25.head()
 result_25 = {}
 result_25
 
-for i in range(0, 25):
+for i in range(0, 24):
     time_host_len = len(d25[d25['Hour'] == i]['Host'].unique())
     time_path_len = len(d25[d25['Hour'] == i]['Path'].unique())
     time_referer_len = len(d25[d25['Hour'] == i]['Referer'].unique())
