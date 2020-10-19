@@ -177,8 +177,25 @@ log[log['UA'] == UA_sort[1]]
 
 
 
+def subplo(day, host):
+    d = int(day)
+    host = int(host)
+    hour = [i for i in range(24)]
+    min = {'start':[0,10,20,30,40,50], 'end':[9,19,29,39,49,59]}
+    for h in hour:
+        plt.figure(figsize=(20,11))
+        print(f'2020-08-{d} {h}시')
+        for m, n in zip(range(len(min["end"])), range(1,7)):
+            # print(m, n)
+            x = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host).index
+            y = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host)
+            plt.subplot(3, 3, n)
+            plt.title(f'08-{d} {h}:{min["start"][m]}~{min["end"][m]}')
+            plt.ylim([0,5000])
+            plt.bar(x, y)
+        plt.show()
 
-plt.figure(figsize=(16,9))
-plt.bar()
+subplo(27, 4)
 
-df.index
+
+df[f'2020-08-25 {hour[0]}:{min["start"][0]}':f'2020-08-25 {hour[0]}:{min["end"][0]}']['Host'].value_counts().head(2).index
