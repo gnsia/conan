@@ -163,7 +163,7 @@ def subplo2(day, host, tick):
     hour = [i for i in range(24)]
     min = {'start':[0,10,20,30,40,50], 'end':[9,19,29,39,49,59]}
     for h in hour:
-        plt.figure(figsize=(16,8))
+        plt.figure(figsize=(16,10))
         print(f'2020-08-{d} {h}시')
         for m, n in zip(range(len(min["end"])), range(1,7)):
             # print(m, n)
