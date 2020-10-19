@@ -73,66 +73,7 @@ subplo_six()
 
 df['Path'].value_counts()[0:5].plot()
 
-
-x0 = df['2020-08-25 10:00':'2020-08-25 10:09']['Bytes'].value_counts().head(2).index
-y0 = df['2020-08-25 10:00':'2020-08-25 10:09']['Bytes'].value_counts().head(2)
-
-x1 = df['2020-08-25 10:10':'2020-08-25 10:19']['Bytes'].value_counts().head(2).index
-y1 = df['2020-08-25 10:10':'2020-08-25 10:19']['Bytes'].value_counts().head(2)
-
-x2 = df['2020-08-25 10:20':'2020-08-25 10:29']['Bytes'].value_counts().head(2).index
-y2 = df['2020-08-25 10:20':'2020-08-25 10:29']['Bytes'].value_counts().head(2)
-
-x3 = df['2020-08-25 10:30':'2020-08-25 10:39']['Bytes'].value_counts().head(2).index
-y3 = df['2020-08-25 10:30':'2020-08-25 10:39']['Bytes'].value_counts().head(2)
-
-x4 = df['2020-08-25 10:40':'2020-08-25 10:49']['Bytes'].value_counts().head(2).index
-y4 = df['2020-08-25 10:40':'2020-08-25 10:49']['Bytes'].value_counts().head(2)
-
-x5 = df['2020-08-25 10:50':'2020-08-25 10:59']['Bytes'].value_counts().head(2).index
-y5 = df['2020-08-25 10:50':'2020-08-25 10:59']['Bytes'].value_counts().head(2)
-
-
-
-def subplo_six():
-    plt.figure(figsize=(16,10))
-
-    plt.subplot(3, 3, 1)
-    plt.title('08-25 10:00~09')
-    plt.ylim([0,5000])
-    plt.bar(x0, y0)
-
-    plt.subplot(3, 3, 2)
-    plt.title('08-25 10:10~19')
-    plt.ylim([0,5000])
-    plt.bar(x1, y1)
-
-    plt.subplot(3, 3, 3)
-    plt.title('08-25 10:20~29')
-    plt.ylim([0,5000])
-    plt.bar(x2, y2)
-
-    plt.subplot(3, 3, 4)
-    plt.title('08-25 10:30~39')
-    plt.ylim([0,5000])
-    plt.bar(x3, y3)
-
-    plt.subplot(3, 3, 5)
-    plt.title('08-25 10:40~49')
-    plt.ylim([0,5000])
-    plt.bar(x4, y4)
-
-    plt.subplot(3, 3, 6)
-    plt.title('08-25 10:50~59')
-    plt.ylim([0,5000])
-    plt.bar(x5, y5)
-
-    plt.show()
-
-subplo_six()
-
-
-
+### 함수 만들기
 
 def subplo(day, host, tick):
     d = int(day) # 24~28 일까지 중 선택
