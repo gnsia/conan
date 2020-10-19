@@ -134,52 +134,9 @@ subplo_six()
 
 
 
-
-
-
-
-normal_log = log.loc[log.Status.astype(str).str.isnumeric(), :].copy()
-
-
-### df에서 host컬럼을 이용해 이상치 제거
-log = df.loc[df.Status.astype(str).str.isnumeric(), :].copy()
-len(df)
-len(log)
-
-### 줄어든 UA 수
-len(df['UA'].unique())
-len(log['UA'].unique())
-
-### UA에서 가장 빈도수가 높은 UA부터 정렬
-UA_sort = log['UA'].value_counts().index
-
-### 해당 UA의 이름과 수량
-UA_sort[0]
-len(log[log['UA'] == UA_sort[0]])
-
-### 해당 UA가 접근한 파일
-log[log['UA'] == UA_sort[0]]['Referer'].value_counts()
-
-### 해당 UA가 사용한 통신방식
-
-log[log['UA'] == UA_sort[0]]['Protocol'].value_counts()
-
-
-
-### 해당 UA를 이용한 Host
-log[log['UA'] == UA_sort[0]]['Host'].value_counts()
-
-
-log[log['UA'] == UA_sort[0]].value_counts()
-
-
-log[log['UA'] == UA_sort[1]]
-
-
-
-def subplo(day, host):
-    d = int(day)
-    host = int(host)
+def subplo(day, host, tick):
+    d = int(day) # 24~28 일까지 중 선택
+    host = int(host) # 몇 개의 아이피를 표시할지 선택
     hour = [i for i in range(24)]
     min = {'start':[0,10,20,30,40,50], 'end':[9,19,29,39,49,59]}
     for h in hour:
@@ -191,11 +148,38 @@ def subplo(day, host):
             y = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host)
             plt.subplot(3, 3, n)
             plt.title(f'08-{d} {h}:{min["start"][m]}~{min["end"][m]}')
-            plt.ylim([0,5000])
+            plt.ylim([0,tick]) # 확인하고 싶은 y축 크기를 선택
             plt.bar(x, y)
         plt.show()
 
-subplo(27, 4)
+subplo(27, 3, 1000)
 
 
-df[f'2020-08-25 {hour[0]}:{min["start"][0]}':f'2020-08-25 {hour[0]}:{min["end"][0]}']['Host'].value_counts().head(2).index
+
+
+def subplo2(day, host, tick):
+    d = int(day) # 24~28 일 중에 원하는 날짜를 입력
+    host = int(host) # 원하는 호스트 갯수 입력
+    hour = [i for i in range(24)]
+    min = {'start':[0,10,20,30,40,50], 'end':[9,19,29,39,49,59]}
+    for h in hour:
+        plt.figure(figsize=(16,8))
+        print(f'2020-08-{d} {h}시')
+        for m, n in zip(range(len(min["end"])), range(1,7)):
+            # print(m, n)
+            host_x = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host).index
+            host_y = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host)
+            # x = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host).index
+            # y = df[f'2020-08-{d} {hour[h]}:{min["start"][m]}':f'2020-08-{d} {hour[h]}:{min["end"][m]}']['Host'].value_counts().head(host)
+            plt.subplot(3, 3, n)
+            plt.title(f'08-{d} {h}:{min["start"][m]}~{min["end"][m]}')
+            plt.xticks(rotation = 45)
+            plt.ylim([0,tick]) # 원하는 Y값 범위 입력
+            # plt.margins(0.2)
+            plt.tight_layout()
+            plt.bar(host_x, host_y)
+        plt.show()
+
+subplo2(27, 10, 1000)
+
+host_x
