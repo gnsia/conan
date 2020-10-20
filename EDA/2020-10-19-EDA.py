@@ -8,9 +8,9 @@ df.index = pd.to_datetime(df.index)
 
 
 ## 개별 호스트가 접근한 수가 꺾이는 포인트가 두군데 있다.
-df['Host'].value_counts()[0:20].plot()
-df['Host'].value_counts()[40:200].plot()
-df['Host'].value_counts().head(200).mean()
+df['Host'].value_counts()[0:200].plot()
+df['Host'].value_counts()[40:300].plot()
+df['Host'].value_counts().head().mean()
 
 ### 2020-08-25 10시를 10분 단위로 슬라이싱하여 상위 두 개의 호스트를 뽑는다.
 
