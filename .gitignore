@@ -1,3 +1,7 @@
-.dataset/
+dataset/
+
 *.csv
+
 *.png
+
+*.log
