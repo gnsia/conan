@@ -1,5 +1,7 @@
 dataset/
 
+ex_dataset/
+
 *.csv
 
 *.png
